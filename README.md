@@ -10,36 +10,42 @@ sem PostgreSQL, Docker ou NgRx.
 
 ---
 
-## Como subir (dois terminais)
+## Como subir
 
-### 1) API (porta 3000)
-
-```bash
-cd api
-npm install
-npm run start:dev
-```
-
-A API fica em `http://localhost:3000/api`.
-
-### 2) Frontend (porta 4200)
+Na raiz do projeto (um terminal só):
 
 ```bash
-cd frontend
+git clone https://github.com/thiago-tap/thais-projeto-base.git
+cd thais-projeto-base
 npm install
 npm start
 ```
 
-O Angular usa `proxy.conf.json` para encaminhar `/api` → `http://localhost:3000`.
+- `npm install` — instala a raiz **e** as pastas `api` + `frontend`
+- `npm start` — sobe API (`:3000`) e Angular (`:4200`) juntos
 
 Abra: `http://localhost:4200`
 
-### Testes da API
+### Comandos úteis na raiz
+
+| Comando | O que faz |
+|---------|-----------|
+| `npm install` | Instala tudo (raiz + api + frontend) |
+| `npm start` / `npm run dev` | Sobe API e frontend juntos |
+| `npm run build` | Build da API e do frontend |
+| `npm run test:api` | Testes e2e da API |
+
+### Alternativa (dois terminais)
 
 ```bash
-cd api
-npm run test:e2e
+# Terminal 1
+cd api && npm install && npm run start:dev
+
+# Terminal 2
+cd frontend && npm install && npm start
 ```
+
+O Angular usa `proxy.conf.json` para encaminhar `/api` → `http://localhost:3000`.
 
 ---
 
