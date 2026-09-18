@@ -1,0 +1,182 @@
+<section class="pagina-painel">
+  <div class="mb-6">
+    <h1 class="font-display text-3xl font-semibold">Buscar usuários</h1>
+    <p class="mt-1 text-[var(--cor-tinta-suave)]">
+      Filtre por texto ou perfil, ordene por nome e edite ou exclua registros do JSON.
+    </p>
+  </div>
+
+  <div class="mb-6 grid gap-4 sm:grid-cols-3">
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="busca">Texto</label>
+      <input
+        id="busca"
+        type="search"
+        [ngModel]="termoBusca()"
+        (ngModelChange)="aoDigitarBusca($event)"
+        placeholder="Ex.: Ana ou @sistema.com"
+        class="campo-input bg-white"
+      />
+    </div>
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="perfil">Perfil</label>
+      <select
+        id="perfil"
+        [ngModel]="filtroPerfil()"
+        (ngModelChange)="aoMudarPerfil($event)"
+        class="campo-input bg-white"
+      >
+        <option value="">Todos</option>
+        <option value="Administrador">Administrador</option>
+        <option value="Usuário">Usuário</option>
+      </select>
+    </div>
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="ordenar">Ordenar</label>
+      <select
+        id="ordenar"
+        [ngModel]="ordenar()"
+        (ngModelChange)="aoMudarOrdenacao($event)"
+        class="campo-input bg-white"
+      >
+        <option value="nome">Nome A–Z</option>
+        <option value="nome-desc">Nome Z–A</option>
+      </select>
+    </div>
+  </div>
+
+  @if (carregando()) {
+    <div class="space-y-2 rounded-xl border-2 border-[var(--cor-tinta)] bg-white p-4" aria-busy="true">
+      <p class="mb-3 text-sm font-semibold text-[var(--cor-tinta-suave)]">Carregando…</p>
+      @for (linha of [1, 2, 3, 4]; track linha) {
+        <div class="h-10 animate-pulse rounded-md bg-[var(--cor-papel-forte)]"></div>
+      }
+    </div>
+  }
+
+  @if (mensagemErro()) {
+    <div
+      class="rounded-md border-2 border-[var(--cor-destaque)] bg-red-50 px-4 py-3 text-sm font-medium text-[var(--cor-destaque)]"
+      role="alert"
+    >
+      {{ mensagemErro() }}
+    </div>
+  }
+
+  @if (!carregando() && !mensagemErro() && jaCarregou() && usuarios().length === 0) {
+    <div
+      class="rounded-2xl border-2 border-dashed border-[var(--cor-tinta)] bg-white px-6 py-12 text-center shadow-[4px_4px_0_0_var(--cor-tinta)]"
+    >
+      <div class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full border-2 border-[var(--cor-tinta)] bg-[var(--cor-papel)]">
+        <ng-icon name="lucideUsers" size="1.75rem" />
+      </div>
+      @if (temFiltrosAtivos) {
+        <p class="font-display text-xl font-semibold">Nenhum resultado</p>
+        <p class="mt-2 text-sm text-[var(--cor-tinta-suave)]">
+          Não há usuários para os filtros atuais. Tente limpar a busca ou mudar o perfil.
+        </p>
+        <button type="button" class="botao-secundario mt-5" (click)="limparFiltros()">
+          Limpar filtros
+        </button>
+      } @else {
+        <p class="font-display text-xl font-semibold">Ainda não há usuários</p>
+        <p class="mt-2 text-sm text-[var(--cor-tinta-suave)]">
+          Cadastre o primeiro usuário para começar a demonstração da lista e do arquivo JSON.
+        </p>
+        <a routerLink="/usuarios/cadastro" class="botao-primario mt-5 inline-flex">
+          <ng-icon name="lucideUserPlus" />
+          Cadastrar o primeiro
+        </a>
+      }
+    </div>
+  }
+
+  @if (!carregando() && usuarios().length > 0) {
+    <div class="overflow-x-auto rounded-xl border-2 border-[var(--cor-tinta)] bg-white">
+      <table class="w-full min-w-[720px] text-left text-sm">
+        <thead class="bg-[var(--cor-papel-forte)]">
+          <tr>
+            <th class="px-4 py-3 font-semibold">Nome</th>
+            <th class="px-4 py-3 font-semibold">E-mail</th>
+            <th class="px-4 py-3 font-semibold">Perfil</th>
+            <th class="px-4 py-3 font-semibold">Criado</th>
+            <th class="px-4 py-3 font-semibold">Atualizado</th>
+            <th class="px-4 py-3 font-semibold">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of usuarios(); track usuario.id) {
+            <tr
+              class="border-t border-[var(--cor-tinta)]/15 transition"
+              [class.linha-destacada]="estaDestacado(usuario)"
+            >
+              <td class="px-4 py-3 font-medium">
+                {{ usuario.nome }}
+                @if (estaDestacado(usuario)) {
+                  <span class="ml-2 text-xs font-bold text-[var(--cor-destaque)]">novo/atualizado</span>
+                }
+              </td>
+              <td class="px-4 py-3">{{ usuario.email }}</td>
+              <td class="px-4 py-3">
+                <span
+                  class="inline-block rounded-full border border-[var(--cor-tinta)] px-2 py-0.5 text-xs font-semibold"
+                >
+                  {{ usuario.perfil }}
+                </span>
+              </td>
+              <td class="px-4 py-3 text-xs text-[var(--cor-tinta-suave)]">
+                {{ formatarDataHora(usuario.criadoEm) }}
+              </td>
+              <td class="px-4 py-3 text-xs text-[var(--cor-tinta-suave)]">
+                {{ formatarDataHora(usuario.atualizadoEm) }}
+              </td>
+              <td class="px-4 py-3">
+                <div class="flex flex-wrap gap-2">
+                  <a
+                    [routerLink]="['/usuarios', usuario.id, 'editar']"
+                    class="inline-flex items-center gap-1 rounded border-2 border-[var(--cor-tinta)] px-2 py-1 text-xs font-semibold hover:bg-[var(--cor-tinta)] hover:text-[var(--cor-papel)]"
+                  >
+                    <ng-icon name="lucidePencil" size="0.9rem" />
+                    Editar
+                  </a>
+                  <button
+                    type="button"
+                    class="inline-flex items-center gap-1 rounded border-2 border-[var(--cor-destaque)] px-2 py-1 text-xs font-semibold text-[var(--cor-destaque)] hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40"
+                    [disabled]="ehUsuarioLogado(usuario)"
+                    [title]="
+                      ehUsuarioLogado(usuario)
+                        ? 'Você não pode excluir a própria conta'
+                        : 'Excluir usuário'
+                    "
+                    (click)="pedirExclusao(usuario)"
+                  >
+                    <ng-icon name="lucideTrash2" size="0.9rem" />
+                    Excluir
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 text-xs text-[var(--cor-tinta-suave)]">
+      {{ usuarios().length }} usuário(s) na lista
+    </p>
+  }
+</section>
+
+@if (usuarioParaExcluir(); as alvo) {
+  <app-modal-confirmacao
+    [aberto]="true"
+    titulo="Excluir usuário?"
+    [mensagem]="mensagemExclusao"
+    rotuloConfirmar="Confirmar exclusão"
+    rotuloCancelar="Cancelar"
+    [carregando]="excluindo()"
+    tom="perigo"
+    icone="lucideTrash2"
+    (confirmar)="confirmarExclusao()"
+    (cancelar)="cancelarExclusao()"
+  />
+}

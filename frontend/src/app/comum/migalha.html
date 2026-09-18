@@ -1,0 +1,14 @@
+<nav class="migalha" aria-label="Navegação estrutural">
+  @for (item of itens(); track item.rotulo; let ultimo = $last) {
+    @if (item.rota && !ultimo) {
+      <a [routerLink]="item.rota">{{ item.rotulo }}</a>
+    } @else {
+      <span [class.font-semibold]="ultimo" [class.text-[var(--cor-tinta)]]="ultimo">
+        {{ item.rotulo }}
+      </span>
+    }
+    @if (!ultimo) {
+      <span aria-hidden="true">/</span>
+    }
+  }
+</nav>

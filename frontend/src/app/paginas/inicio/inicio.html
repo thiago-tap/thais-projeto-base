@@ -1,0 +1,105 @@
+<section class="pagina-painel">
+  <div class="mb-8">
+    <p class="text-sm font-semibold uppercase tracking-wide text-[var(--cor-tinta-suave)]">
+      Painel interno
+    </p>
+    <h1 class="font-display text-3xl font-semibold sm:text-4xl">
+      Olá, {{ usuarioAtual()?.nome?.split(' ')[0] ?? 'equipe' }}
+    </h1>
+    <p class="mt-2 max-w-2xl text-[var(--cor-tinta-suave)]">
+      Visão geral do sistema de gestão de usuários — ideal para abrir a apresentação
+      antes de entrar na busca e no cadastro.
+    </p>
+  </div>
+
+  @if (carregando()) {
+    <div class="grid gap-4 sm:grid-cols-3">
+      @for (card of [1, 2, 3]; track card) {
+        <div class="h-28 animate-pulse rounded-2xl border-2 border-[var(--cor-tinta)] bg-white"></div>
+      }
+    </div>
+  } @else if (mensagemErro()) {
+    <div
+      class="rounded-md border-2 border-[var(--cor-destaque)] bg-red-50 px-4 py-3 text-sm font-medium text-[var(--cor-destaque)]"
+      role="alert"
+    >
+      {{ mensagemErro() }}
+    </div>
+  } @else {
+    <div class="grid gap-4 sm:grid-cols-3">
+      <article class="rounded-2xl border-2 border-[var(--cor-tinta)] bg-white p-5 shadow-[4px_4px_0_0_var(--cor-tinta)]">
+        <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[var(--cor-tinta)] bg-[var(--cor-papel)]">
+          <ng-icon name="lucideUsers" />
+        </div>
+        <p class="text-sm text-[var(--cor-tinta-suave)]">Total na lista</p>
+        <p class="font-display text-3xl font-semibold">{{ total() }}</p>
+      </article>
+
+      <article class="rounded-2xl border-2 border-[var(--cor-tinta)] bg-white p-5 shadow-[4px_4px_0_0_var(--cor-tinta)]">
+        <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[var(--cor-tinta)] bg-[var(--cor-papel)]">
+          <ng-icon name="lucideShield" />
+        </div>
+        <p class="text-sm text-[var(--cor-tinta-suave)]">Administradores</p>
+        <p class="font-display text-3xl font-semibold">{{ totalAdmins() }}</p>
+      </article>
+
+      <article class="rounded-2xl border-2 border-[var(--cor-tinta)] bg-white p-5 shadow-[4px_4px_0_0_var(--cor-tinta)]">
+        <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[var(--cor-tinta)] bg-[var(--cor-papel)]">
+          <ng-icon name="lucideUserRound" />
+        </div>
+        <p class="text-sm text-[var(--cor-tinta-suave)]">Usuários</p>
+        <p class="font-display text-3xl font-semibold">{{ totalUsuariosComuns() }}</p>
+      </article>
+    </div>
+
+    <div class="mt-8 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+      <section class="rounded-2xl border-2 border-[var(--cor-tinta)] bg-white p-5">
+        <div class="mb-4 flex items-center justify-between gap-2">
+          <h2 class="font-display text-xl font-semibold">Atualizados recentemente</h2>
+          <a routerLink="/usuarios" class="text-sm font-semibold underline-offset-2 hover:underline">
+            Ver todos
+          </a>
+        </div>
+        <ul class="divide-y divide-[var(--cor-tinta)]/15">
+          @for (usuario of recentes(); track usuario.id) {
+            <li class="flex flex-wrap items-center justify-between gap-2 py-3 text-sm">
+              <div>
+                <p class="font-semibold">{{ usuario.nome }}</p>
+                <p class="text-[var(--cor-tinta-suave)]">{{ usuario.email }}</p>
+              </div>
+              <div class="text-right text-xs text-[var(--cor-tinta-suave)]">
+                <p>{{ usuario.perfil }}</p>
+                <p>{{ formatarDataHora(usuario.atualizadoEm) }}</p>
+              </div>
+            </li>
+          }
+        </ul>
+      </section>
+
+      <section class="rounded-2xl border-2 border-[var(--cor-tinta)] bg-[var(--cor-papel-forte)] p-5">
+        <h2 class="font-display text-xl font-semibold">Atalhos da demo</h2>
+        <p class="mt-1 text-sm text-[var(--cor-tinta-suave)]">
+          Caminhos que costumam aparecer na apresentação.
+        </p>
+        <div class="mt-5 flex flex-col gap-2">
+          <a routerLink="/usuarios" class="botao-secundario justify-start bg-white">
+            <ng-icon name="lucideSearch" />
+            Buscar e filtrar usuários
+          </a>
+          <a routerLink="/usuarios/cadastro" class="botao-secundario justify-start bg-white">
+            <ng-icon name="lucideUserPlus" />
+            Cadastrar novo usuário
+          </a>
+          <a routerLink="/conta/perfil" class="botao-secundario justify-start bg-white">
+            <ng-icon name="lucideUserRound" />
+            Ver meu perfil
+          </a>
+          <a routerLink="/sobre" class="botao-primario justify-start">
+            <ng-icon name="lucideBookOpen" />
+            Abrir roteiro da aula
+          </a>
+        </div>
+      </section>
+    </div>
+  }
+</section>

@@ -1,0 +1,83 @@
+<header class="border-b-2 border-[var(--cor-tinta)] bg-[var(--cor-papel-forte)]">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4">
+    <a routerLink="/inicio" class="flex items-center gap-3 no-underline text-inherit">
+      <div
+        class="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[var(--cor-tinta)] bg-white text-sm font-bold"
+        [attr.aria-label]="'Avatar de ' + (usuarioAtual()?.nome ?? 'usuário')"
+      >
+        {{ iniciais }}
+      </div>
+      <div>
+        <p class="font-display text-2xl font-semibold tracking-tight">Painel de Usuários</p>
+        <p class="text-sm text-[var(--cor-tinta-suave)]">
+          Olá, {{ usuarioAtual()?.nome ?? 'visitante' }}
+          @if (totalUsuarios() > 0) {
+            <span class="ml-2 rounded-full border border-[var(--cor-tinta)] px-2 py-0.5 text-xs font-semibold">
+              {{ totalUsuarios() }} na lista
+            </span>
+          }
+        </p>
+      </div>
+    </a>
+
+    <nav class="flex flex-wrap items-center gap-2" aria-label="Menu principal">
+      <a
+        routerLink="/inicio"
+        routerLinkActive="bg-[var(--cor-tinta)] text-[var(--cor-papel)]"
+        class="inline-flex items-center gap-1.5 rounded-md border-2 border-[var(--cor-tinta)] px-3 py-2 text-sm font-semibold transition hover:bg-[var(--cor-tinta)] hover:text-[var(--cor-papel)]"
+      >
+        <ng-icon name="lucideLayoutDashboard" />
+        Início
+      </a>
+      <a
+        routerLink="/usuarios"
+        routerLinkActive="bg-[var(--cor-tinta)] text-[var(--cor-papel)]"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="inline-flex items-center gap-1.5 rounded-md border-2 border-[var(--cor-tinta)] px-3 py-2 text-sm font-semibold transition hover:bg-[var(--cor-tinta)] hover:text-[var(--cor-papel)]"
+      >
+        <ng-icon name="lucideSearch" />
+        Buscar
+      </a>
+      <a
+        routerLink="/usuarios/cadastro"
+        routerLinkActive="bg-[var(--cor-tinta)] text-[var(--cor-papel)]"
+        class="inline-flex items-center gap-1.5 rounded-md border-2 border-[var(--cor-tinta)] px-3 py-2 text-sm font-semibold transition hover:bg-[var(--cor-tinta)] hover:text-[var(--cor-papel)]"
+      >
+        <ng-icon name="lucideUserPlus" />
+        Cadastrar
+      </a>
+      <a
+        routerLink="/conta/perfil"
+        routerLinkActive="bg-[var(--cor-tinta)] text-[var(--cor-papel)]"
+        class="inline-flex items-center gap-1.5 rounded-md border-2 border-[var(--cor-tinta)] px-3 py-2 text-sm font-semibold transition hover:bg-[var(--cor-tinta)] hover:text-[var(--cor-papel)]"
+      >
+        <ng-icon name="lucideUserRound" />
+        Perfil
+      </a>
+      <a
+        routerLink="/sobre"
+        routerLinkActive="bg-[var(--cor-tinta)] text-[var(--cor-papel)]"
+        class="inline-flex items-center gap-1.5 rounded-md border-2 border-[var(--cor-tinta)] px-3 py-2 text-sm font-semibold transition hover:bg-[var(--cor-tinta)] hover:text-[var(--cor-papel)]"
+      >
+        <ng-icon name="lucideBookOpen" />
+        Sobre
+      </a>
+      <a
+        routerLink="/conta/senha"
+        routerLinkActive="bg-[var(--cor-tinta)] text-[var(--cor-papel)]"
+        class="inline-flex items-center gap-1.5 rounded-md border-2 border-[var(--cor-tinta)] px-3 py-2 text-sm font-semibold transition hover:bg-[var(--cor-tinta)] hover:text-[var(--cor-papel)]"
+      >
+        <ng-icon name="lucideKeyRound" />
+        Senha
+      </a>
+      <button
+        type="button"
+        (click)="sair()"
+        class="inline-flex items-center gap-1.5 rounded-md bg-[var(--cor-destaque)] px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+      >
+        <ng-icon name="lucideLogOut" />
+        Sair
+      </button>
+    </nav>
+  </div>
+</header>

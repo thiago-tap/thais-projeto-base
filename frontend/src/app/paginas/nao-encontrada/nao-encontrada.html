@@ -1,0 +1,20 @@
+<div class="flex min-h-screen flex-col items-center justify-center bg-[var(--cor-papel)] px-4 text-center text-[var(--cor-tinta)]">
+  <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-[var(--cor-tinta)] bg-white">
+    <ng-icon name="lucideSearch" size="2rem" />
+  </div>
+  <p class="font-display text-6xl font-semibold">404</p>
+  <h1 class="mt-2 font-display text-2xl font-semibold">Página não encontrada</h1>
+  <p class="mt-2 max-w-md text-sm text-[var(--cor-tinta-suave)]">
+    Esse endereço não existe neste painel. Volte para a busca de usuários ou para o login.
+  </p>
+  <div class="mt-6 flex flex-wrap justify-center gap-3">
+    <a routerLink="/usuarios" class="botao-primario">
+      <ng-icon name="lucideSearch" />
+      Ir para a busca
+    </a>
+    <a routerLink="/login" class="botao-secundario">
+      <ng-icon name="lucideLogIn" />
+      Login
+    </a>
+  </div>
+</div>

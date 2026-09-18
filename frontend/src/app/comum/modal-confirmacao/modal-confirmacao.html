@@ -1,0 +1,63 @@
+@if (aberto()) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-[var(--cor-tinta)]/45 p-4 backdrop-blur-[1px]"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="'titulo-modal-confirmacao'"
+    (click)="aoClicarFundo($event)"
+  >
+    <div
+      class="w-full max-w-md animate-[aparecer_0.18s_ease-out] rounded-2xl border-2 border-[var(--cor-tinta)] bg-[var(--cor-papel)] p-6 shadow-[8px_8px_0_0_var(--cor-tinta)]"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="mb-4 flex items-start gap-3">
+        <div
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2"
+          [class]="
+            tom() === 'perigo'
+              ? 'border-[var(--cor-destaque)] bg-red-50 text-[var(--cor-destaque)]'
+              : 'border-[var(--cor-tinta)] bg-white text-[var(--cor-tinta)]'
+          "
+        >
+          <ng-icon [name]="icone()" size="1.35rem" />
+        </div>
+        <div>
+          <h2
+            id="titulo-modal-confirmacao"
+            class="font-display text-xl font-semibold"
+          >
+            {{ titulo() }}
+          </h2>
+          <p class="mt-2 text-sm leading-relaxed text-[var(--cor-tinta-suave)]">
+            {{ mensagem() }}
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-wrap justify-end gap-2">
+        <button
+          type="button"
+          class="botao-secundario"
+          [disabled]="carregando()"
+          (click)="aoCancelar()"
+        >
+          {{ rotuloCancelar() }}
+        </button>
+        <button
+          type="button"
+          class="inline-flex items-center gap-1.5 rounded-md px-4 py-3 text-sm font-bold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+          [class]="
+            tom() === 'perigo'
+              ? 'bg-[var(--cor-destaque)]'
+              : 'bg-[var(--cor-tinta)]'
+          "
+          [disabled]="carregando()"
+          (click)="aoConfirmar()"
+        >
+          <ng-icon [name]="icone()" size="1rem" />
+          {{ carregando() ? 'Aguarde…' : rotuloConfirmar() }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

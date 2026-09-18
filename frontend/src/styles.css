@@ -1,0 +1,98 @@
+/**
+ * Estilos globais — tema claro para projetor
+ * Tipografia: Fraunces + Source Sans 3
+ */
+
+@import 'tailwindcss';
+
+:root {
+  --cor-papel: #f4efe6;
+  --cor-papel-forte: #ebe3d4;
+  --cor-tinta: #173a4a;
+  --cor-tinta-suave: #4a6672;
+  --cor-destaque: #b23a2f;
+}
+
+@layer base {
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    background: var(--cor-papel);
+    color: var(--cor-tinta);
+  }
+
+  .font-display {
+    font-family: 'Fraunces', Georgia, serif;
+  }
+}
+
+/**
+ * Padrão visual compartilhado das telas do painel.
+ * Formulários ficam centralizados (como o login), sem “grudar” na esquerda.
+ */
+@layer components {
+  .pagina-painel {
+    @apply w-full;
+  }
+
+  .pagina-formulario {
+    @apply mx-auto flex w-full max-w-xl flex-col items-stretch;
+  }
+
+  .pagina-formulario__cabecalho {
+    @apply mb-6 text-center;
+  }
+
+  .pagina-formulario__titulo {
+    font-family: 'Fraunces', Georgia, serif;
+    @apply text-3xl font-semibold;
+  }
+
+  .pagina-formulario__subtitulo {
+    @apply mt-1 text-sm text-[var(--cor-tinta-suave)];
+  }
+
+  .card-formulario {
+    @apply w-full space-y-5 rounded-2xl border-2 border-[var(--cor-tinta)] bg-white p-6 shadow-[6px_6px_0_0_var(--cor-tinta)];
+  }
+
+  .campo-input {
+    @apply w-full rounded-md border-2 border-[var(--cor-tinta)] bg-[var(--cor-papel)] px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--cor-destaque)];
+  }
+
+  .botao-primario {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-[var(--cor-tinta)] px-4 py-3 text-sm font-bold text-[var(--cor-papel)] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .botao-secundario {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border-2 border-[var(--cor-tinta)] px-4 py-3 text-sm font-semibold transition hover:bg-[var(--cor-papel-forte)];
+  }
+
+  .linha-destacada {
+    @apply bg-amber-50 ring-2 ring-inset ring-[var(--cor-destaque)]/40;
+  }
+
+  .migalha {
+    @apply mb-4 flex flex-wrap items-center justify-center gap-2 text-sm text-[var(--cor-tinta-suave)];
+  }
+
+  .migalha a {
+    @apply font-semibold text-[var(--cor-tinta)] underline-offset-2 hover:underline;
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

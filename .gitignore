@@ -1,0 +1,28 @@
+# Dependências e builds
+node_modules/
+dist/
+.angular/
+coverage/
+tmp/
+*.tsbuildinfo
+
+# Logs e ambiente
+*.log
+npm-debug.log*
+.env
+.env.*
+!.env.example
+
+# IDE / SO
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Nest / Vitest
+api/coverage/

@@ -1,0 +1,46 @@
+<section class="pagina-painel pagina-formulario">
+  <app-migalha [itens]="itensMigalha" />
+
+  <div class="pagina-formulario__cabecalho">
+    <h1 class="pagina-formulario__titulo">Trocar senha</h1>
+    <p class="pagina-formulario__subtitulo">
+      Altera o hash no arquivo JSON da conta que está logada agora.
+    </p>
+  </div>
+
+  <form class="card-formulario" [formGroup]="formulario" (ngSubmit)="enviar()">
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="senhaAtual">Senha atual</label>
+      <input
+        id="senhaAtual"
+        type="password"
+        formControlName="senhaAtual"
+        class="campo-input"
+      />
+    </div>
+
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="senhaNova">Nova senha</label>
+      <input
+        id="senhaNova"
+        type="password"
+        formControlName="senhaNova"
+        class="campo-input"
+      />
+    </div>
+
+    @if (mensagemErro()) {
+      <div
+        class="rounded-md border-2 border-[var(--cor-destaque)] bg-red-50 px-3 py-2 text-sm font-medium text-[var(--cor-destaque)]"
+        role="alert"
+      >
+        {{ mensagemErro() }}
+      </div>
+    }
+
+    <button type="submit" [disabled]="salvando()" class="botao-primario w-full">
+      <ng-icon name="lucideKeyRound" />
+      {{ salvando() ? 'Salvando…' : 'Atualizar senha' }}
+    </button>
+  </form>
+</section>

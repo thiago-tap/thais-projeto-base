@@ -1,0 +1,20 @@
+/**
+ * Camada 5 — AuthGuard
+ * Guarda funcional: se não estiver logado, redireciona para /login.
+ * Protege /usuarios e /usuarios/cadastro.
+ */
+
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../servicos/auth.service';
+
+export const authGuard: CanActivateFn = () => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (authService.estaAutenticado()) {
+    return true;
+  }
+
+  return router.createUrlTree(['/login']);
+};

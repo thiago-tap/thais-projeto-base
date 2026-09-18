@@ -1,0 +1,64 @@
+<section class="pagina-painel pagina-formulario">
+  <app-migalha [itens]="itensMigalha" />
+
+  <div class="pagina-formulario__cabecalho">
+    <h1 class="pagina-formulario__titulo">Meu perfil</h1>
+    <p class="pagina-formulario__subtitulo">
+      Dados da conta que está autenticada neste navegador.
+    </p>
+  </div>
+
+  @if (usuarioAtual(); as usuario) {
+    <div class="card-formulario">
+      <div class="flex flex-col items-center gap-3 border-b border-[var(--cor-tinta)]/15 pb-5 text-center">
+        <div
+          class="flex h-16 w-16 items-center justify-center rounded-full border-2 border-[var(--cor-tinta)] bg-[var(--cor-papel)] text-lg font-bold"
+        >
+          {{ iniciais }}
+        </div>
+        <div>
+          <p class="font-display text-2xl font-semibold">{{ usuario.nome }}</p>
+          <p class="text-sm text-[var(--cor-tinta-suave)]">{{ usuario.email }}</p>
+        </div>
+        <span class="rounded-full border border-[var(--cor-tinta)] px-3 py-1 text-xs font-semibold">
+          {{ usuario.perfil }}
+        </span>
+      </div>
+
+      <dl class="space-y-3 text-sm">
+        <div class="flex justify-between gap-4">
+          <dt class="text-[var(--cor-tinta-suave)]">Identificador</dt>
+          <dd class="font-semibold">#{{ usuario.id }}</dd>
+        </div>
+        <div class="flex justify-between gap-4">
+          <dt class="text-[var(--cor-tinta-suave)]">Criado em</dt>
+          <dd class="font-semibold">{{ formatarDataHora(usuario.criadoEm) }}</dd>
+        </div>
+        <div class="flex justify-between gap-4">
+          <dt class="text-[var(--cor-tinta-suave)]">Atualizado em</dt>
+          <dd class="font-semibold">{{ formatarDataHora(usuario.atualizadoEm) }}</dd>
+        </div>
+      </dl>
+
+      <p class="rounded-md border border-dashed border-[var(--cor-tinta)]/30 bg-[var(--cor-papel)] px-3 py-2 text-xs text-[var(--cor-tinta-suave)]">
+        O perfil é só visual neste projeto: não libera telas diferentes por papel.
+      </p>
+
+      <div class="flex flex-wrap gap-2">
+        <a routerLink="/conta/senha" class="botao-primario flex-1">
+          <ng-icon name="lucideKeyRound" />
+          Trocar senha
+        </a>
+        <a routerLink="/inicio" class="botao-secundario flex-1">
+          <ng-icon name="lucideLayoutDashboard" />
+          Voltar ao início
+        </a>
+      </div>
+    </div>
+  } @else {
+    <div class="card-formulario text-center">
+      <p class="text-sm text-[var(--cor-tinta-suave)]">Nenhuma sessão ativa.</p>
+      <a routerLink="/login" class="botao-primario mt-4 inline-flex">Ir para o login</a>
+    </div>
+  }
+</section>

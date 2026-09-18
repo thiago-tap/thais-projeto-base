@@ -1,0 +1,67 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nome": "Administrador do Sistema",
+      "email": "admin@sistema.com",
+      "senhaHash": "$2b$10$5g3bzDyFtndv8xNdqjxDNuhROqHhYLOFKn7zMlomeb4MbEDCLef2m",
+      "perfil": "Administrador",
+      "criadoEm": "2026-01-10T10:00:00.000Z",
+      "atualizadoEm": "2026-01-10T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "nome": "Ana Souza",
+      "email": "ana.souza@sistema.com",
+      "senhaHash": "$2b$10$1UbS8Xc2HKX53pKf/fYoZ.m01YnQyhQsbsi6UPCmk77.ZmdNLO7Oq",
+      "perfil": "Usuário",
+      "criadoEm": "2026-01-12T11:00:00.000Z",
+      "atualizadoEm": "2026-01-12T11:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "nome": "Bruno Lima",
+      "email": "bruno.lima@sistema.com",
+      "senhaHash": "$2b$10$LFW0y0iJ.6cwW0kPaHLzyOClmK7KCKpwOjVuLD8MSp9cjFXFMaMkS",
+      "perfil": "Usuário",
+      "criadoEm": "2026-01-15T14:30:00.000Z",
+      "atualizadoEm": "2026-02-01T09:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "nome": "Carla Mendes",
+      "email": "carla.mendes@sistema.com",
+      "senhaHash": "$2b$10$IdPkatk9Q1FtW/UskaqmMOtIowDlEmHlV5BAgs5ph/1BP44uTLfmq",
+      "perfil": "Usuário",
+      "criadoEm": "2026-02-03T08:15:00.000Z",
+      "atualizadoEm": "2026-02-03T08:15:00.000Z"
+    },
+    {
+      "id": "5",
+      "nome": "Diego Ferreira",
+      "email": "diego.ferreira@sistema.com",
+      "senhaHash": "$2b$10$T8Lq3Q9cdYOnodFZYLNlwepSv/CjBbzQkc3T4/zvK0KfzZRdW5Ncu",
+      "perfil": "Usuário",
+      "criadoEm": "2026-02-10T16:45:00.000Z",
+      "atualizadoEm": "2026-03-01T12:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "nome": "Elena Costa",
+      "email": "elena.costa@sistema.com",
+      "senhaHash": "$2b$10$0A4hd0iTj2n1VTV7gDA5WOOJmsuw09VNVJcatc9NIFS/q5iHVJZjO",
+      "perfil": "Usuário",
+      "criadoEm": "2026-03-05T13:20:00.000Z",
+      "atualizadoEm": "2026-03-05T13:20:00.000Z"
+    },
+    {
+      "id": "7",
+      "nome": "Thais",
+      "email": "trajano.tmara@gmail.com",
+      "senhaHash": "$2b$10$8Af36dgp8nQ6qyYlvuJmBO05oufqAgPNTlw3QBkic92h.zGore0/6",
+      "perfil": "Administrador",
+      "criadoEm": "2026-09-18T13:53:05.999Z",
+      "atualizadoEm": "2026-09-18T14:44:22.800Z"
+    }
+  ]
+}

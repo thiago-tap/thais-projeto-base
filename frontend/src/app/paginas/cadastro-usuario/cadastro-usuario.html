@@ -1,0 +1,79 @@
+<section class="pagina-painel pagina-formulario">
+  <app-migalha [itens]="itensMigalha" />
+
+  <div class="pagina-formulario__cabecalho">
+    <h1 class="pagina-formulario__titulo">Cadastrar usuário</h1>
+    <p class="pagina-formulario__subtitulo">
+      Os dados vão para a API e são gravados no arquivo banco.json.
+    </p>
+  </div>
+
+  <form class="card-formulario" [formGroup]="formulario" (ngSubmit)="enviar()">
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="nome">Nome</label>
+      <input
+        id="nome"
+        type="text"
+        formControlName="nome"
+        class="campo-input"
+        [class.border-[var(--cor-destaque)]]="campoInvalido('nome')"
+      />
+      @if (campoInvalido('nome')) {
+        <p class="mt-1 text-xs text-[var(--cor-destaque)]">Informe um nome com pelo menos 2 caracteres.</p>
+      }
+    </div>
+
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="email">E-mail</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        class="campo-input"
+        [class.border-[var(--cor-destaque)]]="campoInvalido('email')"
+      />
+      @if (campoInvalido('email')) {
+        <p class="mt-1 text-xs text-[var(--cor-destaque)]">Informe um e-mail válido.</p>
+      }
+    </div>
+
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="senha">Senha</label>
+      <input
+        id="senha"
+        type="password"
+        formControlName="senha"
+        class="campo-input"
+        [class.border-[var(--cor-destaque)]]="campoInvalido('senha')"
+      />
+      @if (campoInvalido('senha')) {
+        <p class="mt-1 text-xs text-[var(--cor-destaque)]">A senha deve ter pelo menos 6 caracteres.</p>
+      }
+    </div>
+
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="perfil">Perfil (visual)</label>
+      <select id="perfil" formControlName="perfil" class="campo-input">
+        <option value="Usuário">Usuário</option>
+        <option value="Administrador">Administrador</option>
+      </select>
+      <p class="mt-1 text-xs text-[var(--cor-tinta-suave)]">
+        Neste projeto o perfil não muda permissões — todo mundo logado vê as mesmas telas.
+      </p>
+    </div>
+
+    @if (mensagemErro()) {
+      <div
+        class="rounded-md border-2 border-[var(--cor-destaque)] bg-red-50 px-3 py-2 text-sm font-medium text-[var(--cor-destaque)]"
+        role="alert"
+      >
+        {{ mensagemErro() }}
+      </div>
+    }
+
+    <button type="submit" [disabled]="carregando()" class="botao-primario w-full">
+      <ng-icon name="lucideUserPlus" />
+      {{ carregando() ? 'Salvando…' : 'Salvar usuário' }}
+    </button>
+  </form>
+</section>

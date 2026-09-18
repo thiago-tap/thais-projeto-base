@@ -1,0 +1,68 @@
+<div class="flex min-h-screen items-center justify-center bg-[var(--cor-papel)] px-4 py-10 text-[var(--cor-tinta)]">
+  <div class="w-full max-w-md rounded-2xl border-2 border-[var(--cor-tinta)] bg-[var(--cor-papel-forte)] p-8 shadow-[6px_6px_0_0_var(--cor-tinta)]">
+    <div class="mb-1 flex items-center justify-center gap-2">
+      <ng-icon name="lucideLogIn" size="1.5rem" />
+      <p class="font-display text-3xl font-semibold">Entrar</p>
+    </div>
+    <p class="mt-2 text-center text-sm text-[var(--cor-tinta-suave)]">
+      Painel interno de gestão de usuários
+    </p>
+
+    <form class="mt-8 space-y-5" [formGroup]="formulario" (ngSubmit)="enviar()">
+      <div>
+        <label class="mb-1 block text-sm font-semibold" for="email">E-mail</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          autocomplete="username"
+          class="w-full rounded-md border-2 border-[var(--cor-tinta)] bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--cor-destaque)]"
+          placeholder="admin@sistema.com"
+        />
+      </div>
+
+      <div>
+        <label class="mb-1 block text-sm font-semibold" for="senha">Senha</label>
+        <input
+          id="senha"
+          type="password"
+          formControlName="senha"
+          autocomplete="current-password"
+          class="w-full rounded-md border-2 border-[var(--cor-tinta)] bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--cor-destaque)]"
+          placeholder="••••••••"
+        />
+      </div>
+
+      @if (mensagemInfo()) {
+        <div
+          class="rounded-md border-2 border-[var(--cor-tinta)] bg-amber-50 px-3 py-2 text-sm font-medium text-[var(--cor-tinta)]"
+          role="status"
+        >
+          {{ mensagemInfo() }}
+        </div>
+      }
+
+      @if (mensagemErro()) {
+        <div
+          class="rounded-md border-2 border-[var(--cor-destaque)] bg-red-50 px-3 py-2 text-sm font-medium text-[var(--cor-destaque)]"
+          role="alert"
+        >
+          {{ mensagemErro() }}
+        </div>
+      }
+
+      <button
+        type="submit"
+        [disabled]="carregando()"
+        class="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[var(--cor-tinta)] px-4 py-3 text-sm font-bold text-[var(--cor-papel)] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        <ng-icon name="lucideLogIn" />
+        {{ carregando() ? 'Entrando…' : 'Entrar no painel' }}
+      </button>
+    </form>
+
+    <p class="mt-6 border-t border-[var(--cor-tinta)]/20 pt-4 text-xs text-[var(--cor-tinta-suave)]">
+      Demo: <strong>admin@sistema.com</strong> / <strong>admin123</strong>
+    </p>
+  </div>
+</div>

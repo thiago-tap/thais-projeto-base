@@ -1,0 +1,50 @@
+<section class="pagina-painel pagina-formulario max-w-3xl">
+  <app-migalha [itens]="itensMigalha" />
+
+  <div class="pagina-formulario__cabecalho">
+    <h1 class="pagina-formulario__titulo">Sobre este projeto</h1>
+    <p class="pagina-formulario__subtitulo">
+      Roteiro curto para apresentar Angular + NestJS + arquivo JSON aos colegas.
+    </p>
+  </div>
+
+  <div class="card-formulario mb-6">
+    <div class="flex items-start gap-3">
+      <div class="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[var(--cor-tinta)] bg-[var(--cor-papel)]">
+        <ng-icon name="lucideBookOpen" />
+      </div>
+      <div>
+        <h2 class="font-display text-xl font-semibold">Ideia da demo</h2>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--cor-tinta-suave)]">
+          Mostrar o caminho completo
+          <strong class="text-[var(--cor-tinta)]"> tela → serviço → HTTP → controller → arquivo JSON </strong>
+          sem Postgres, Docker ou NgRx. Completo o suficiente para impressionar,
+          simples o suficiente para explicar em 15–20 minutos.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <ol class="space-y-3">
+    @for (camada of camadas; track camada.titulo; let i = $index) {
+      <li class="rounded-xl border-2 border-[var(--cor-tinta)] bg-white p-4">
+        <p class="text-xs font-bold uppercase tracking-wide text-[var(--cor-tinta-suave)]">
+          Passo {{ i + 1 }}
+        </p>
+        <h3 class="mt-1 font-display text-lg font-semibold">{{ camada.titulo }}</h3>
+        <p class="mt-1 text-sm text-[var(--cor-tinta-suave)]">{{ camada.texto }}</p>
+      </li>
+    }
+  </ol>
+
+  <div class="mt-8 flex flex-wrap justify-center gap-2">
+    <a routerLink="/inicio" class="botao-secundario">
+      <ng-icon name="lucideLayoutDashboard" />
+      Voltar ao início
+    </a>
+    <a routerLink="/usuarios" class="botao-primario">
+      <ng-icon name="lucideSearch" />
+      Ir para a busca
+    </a>
+  </div>
+</section>
