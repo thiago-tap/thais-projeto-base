@@ -2,7 +2,7 @@
   "usuarios": [
     {
       "id": "1",
-      "nome": "Administrador do Sistema",
+      "nome": "Thiagão o melhor professor de programação do mundo - Administrador do Sistema",
       "email": "admin@sistema.com",
       "senhaHash": "$2b$10$5g3bzDyFtndv8xNdqjxDNuhROqHhYLOFKn7zMlomeb4MbEDCLef2m",
       "perfil": "Administrador",
@@ -56,7 +56,7 @@
     },
     {
       "id": "7",
-      "nome": "Thais",
+      "nome": "Thais Mara Trajano de Oliveira",
       "email": "trajano.tmara@gmail.com",
       "senhaHash": "$2b$10$8Af36dgp8nQ6qyYlvuJmBO05oufqAgPNTlw3QBkic92h.zGore0/6",
       "perfil": "Administrador",
